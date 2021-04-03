@@ -1,17 +1,58 @@
 {% extends "base.html" %}
 
+{% load crispy_forms_tags %}
 {% block title %}TODO - {{ user }}{% endblock %}
 
 {% block content %}
 {% if user.is_authenticated %}
     <p>Welcome {{ user }} - <a href="{% url 'logout' %}">Log Out</a></p>
 
-    <h2>TODO List</h2>
+    <h2>TODO List</h2> 
+
+
     <ul>
-    {% for task in user_task_list %}
-    <li>{{ task.description }} - {{ task.duedate }}</li>
+    <div >
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Description</th>
+                <th scope="col">Due Date</th>
+                <th scope="col">Check/Uncheck</th>
+                <th scope="col">Delete</th>
+            </tr>
+    </thead>
+    <tbody>
+    {% for task in task_list %}
+    <tr{% if task.complete is True %} class="table-success"{% endif %}>
+        <td>
+        {% if task.complete is True %}<strike>{% endif %}
+            {{ task.description }}
+        {% if task.complete is True %}</strike>{% endif %}
+        </td>
+        <td>{{ task.duedate }}</td>
+        <td>
+            {% if task.complete is False %}
+            <a href="/complete-task/{{ task.id }}">complete</a> 
+            {% else %}
+            <a href="/incomplete-task/{{ task.id }}">incomplete</a> 
+            {% endif %}
+        </td>
+        <td><a href="/delete-task/{{ task.id }}">delete</a></td>
+    </tr>
     {% endfor %}
-    </ul>
+    
+    </tbody>
+    </table>
+    </div>
+
+    <h2>Add Task</h2>
+    <form action="/create-task" method="post">
+        {% csrf_token %}
+        {{ task_form|crispy }} 
+        <input type="submit" value="Submit">
+    </form>
+    
+
 {% else %}
     <p>You are not logged in</p>
     <a href="{% url 'login' %}">Log In</a>
