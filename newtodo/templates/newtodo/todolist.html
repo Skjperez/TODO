@@ -18,6 +18,7 @@
                 <th scope="col">Description</th>
                 <th scope="col">Due Date</th>
                 <th scope="col">Check/Uncheck</th>
+                <th scope="col">Changes</th>
                 <th scope="col">Delete</th>
             </tr>
     </thead>
@@ -37,6 +38,7 @@
             <a href="/incomplete-task/{{ task.id }}">incomplete</a> 
             {% endif %}
         </td>
+        <td><a href="/update-task/{{ task.id }}">update</a></td>
         <td><a href="/delete-task/{{ task.id }}">delete</a></td>
     </tr>
     {% endfor %}

@@ -58,3 +58,35 @@ def IncompleteTask(request, task_id):
     t.complete = False
     t.save()
     return HttpResponseRedirect('/')
+
+def UpdateTask(request, task_id):
+    # get task by the id
+    t = Task.objects.get(id=task_id)
+
+    # generate form with task object data preloaded
+    form = TaskForm(
+        initial=
+            {
+                "description": t.description,
+                "duedate": t.duedate,
+            }
+        )
+
+    # preload context with form
+    context = {
+        'task_form': form,
+        'username': request.user,
+        'task_id': task_id
+    }
+
+    # save task with updated data and return to home page
+    if request.method == "POST":
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            t.description = form.cleaned_data["description"]
+            t.duedate = form.cleaned_data["duedate"]
+            t.save()
+            return HttpResponseRedirect('/')
+    
+    #load update template with form
+    return render(request, 'newtodo/update.html', context)
