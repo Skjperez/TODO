@@ -6,10 +6,13 @@
 {% block content %}
 
 <h2>Modify Task</h2>
-    <form action="/update-task/{{ task_id }}" method="post">
+<div class="container text-white">
+    <br><br>
+</div> 
+   <form action="/update-task/{{ task_id }}" method="post">
         {% csrf_token %}
         {{ task_form|crispy }} 
-        <button type="submit">Update</button>
+        <button type="submit" class="btn btn-primary">Update</button>
     </form>
     
 
