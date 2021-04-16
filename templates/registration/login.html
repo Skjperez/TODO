@@ -1,25 +1,46 @@
 <!-- templates/registration/login.html -->
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Login{% endblock %}
 
-{% block content %}
+{% block head %}
+<style>
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
 
-<div class="container text-white">
-  <br><br>
-</div>
-<h2>Todo List Log In</h2>
-<div class="container text-white">
-  <br><br>
-</div>
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+</style>
+
+   <!-- Custom styles for this template -->
+   <link rel="stylesheet" href="{% static 'css/signin.css' %}">
+{% endblock %}
+
+{% block content %}
+<body class="text-center">
+<main class="form-signin">
+  <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 <form method="post">
   {% csrf_token %}
-  {{ form.as_p }}
-  <div class="checkbox mb-3">
-    <label>
-      <input type="checkbox" value="remember-me"> Remember me
-    </label>
+  <div class="form-floating">
+    <label for="id_username">Username:</label>
+    <input class="form-control" type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username">
   </div>
-  <button type="submit" class="btn btn-primary">Sign in</button>
+  <div class="form-floating">
+    <label for="id_password">Password:</label>
+    <input class="form-control" type="password" name="password" autocomplete="current-password" required id="id_password">
+  </div>
+  <button type="submit" class="w-100 btn btn-lg btn-primary">Sign in</button>
 </form>
+</main>
+</body>
 {% endblock %}

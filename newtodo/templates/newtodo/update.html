@@ -5,6 +5,8 @@
 
 {% block content %}
 
+<body class="text-center">
+    <main>
 <h2>Modify Task</h2>
 <div class="container text-white">
     <br><br>
@@ -14,6 +16,7 @@
         {{ task_form|crispy }} 
         <button type="submit" class="btn btn-primary">Update</button>
     </form>
-    
+ </main>
+</body>   
 
 {% endblock content %}
