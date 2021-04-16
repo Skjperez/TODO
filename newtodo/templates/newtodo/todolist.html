@@ -11,9 +11,14 @@
 
     <div class="container-fluid">
         <a class="navbar-brand" href="#">TODO List</a>
-    <font color="white">
-    <p> Welcome {{ user }} - <a href="{% url 'logout' %}">Log Out</a></p> 
-    </font>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <span style="color: #fff;">Welcome {{ user }} - </span>
+                <a href="{% url 'logout' %}">Log Out</a>
+            </li>
+            </ul>
+        </div>
     </div>
 </nav>
 
